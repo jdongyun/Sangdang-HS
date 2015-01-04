@@ -1,6 +1,6 @@
-Sangdang High School Application
+Sangdang High School Application for Android
 2014~2015 Dongyun Jeong<ceo@inerve.kr>
-Original Source made by ByoungJune Kim<kbj9704@gmail.com, https://github.com/Codejune/SutaekHS>
+Original Source by ByoungJune Kim<kbj9704@gmail.com, https://github.com/Codejune/SutaekHS>
 ====================
 
                        Version 3, 29 June 2007
