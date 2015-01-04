@@ -3,6 +3,7 @@
     <color name="pressed">#CC6bbc6e</color>
     <color name="public_color">#ff4baf4f</color>
     <color name="public_darker_color">#ff368e3a</color>
+    <color name="float_btn_color">#ffe34f54</color>
     <color name="black">#ff000000</color>
     <color name="white">#ffffffff</color>
     <color name="background">#ffe3e3e3</color>

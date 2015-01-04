@@ -1,15 +1,19 @@
 package com.dongyun.sangdang;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.gc.materialdesign.views.Button;
+//import com.gc.materialdesign.views.CheckBox;
 
 import de.psdev.licensesdialog.LicensesDialog;
 import de.psdev.licensesdialog.licenses.ApacheSoftwareLicense20;
@@ -62,6 +66,30 @@ public class Appinfo extends ActionBarActivity {
                 Intent contrubutors = new Intent(Appinfo.this,
                         Doc_Contributors.class);
                 startActivity(contrubutors);
+            }
+        });
+
+        final SharedPreferences pref = getApplicationContext().getSharedPreferences("sangdang", Context.MODE_PRIVATE);
+        final SharedPreferences.Editor edit = pref.edit();
+
+        final CheckBox alarm = (CheckBox) findViewById(R.id.chkbox_alarm);
+        boolean alarm_bool = pref.getBoolean("alarm", true);
+        if(alarm_bool) {
+            alarm.setChecked(true);
+        } else {
+            alarm.setChecked(false);
+        }
+        alarm.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(alarm.isChecked()) {
+                    DevLog.i("AppInfo", "checked");
+                    edit.putBoolean("alarm", true).commit();
+
+                } else {
+                    DevLog.i("AppInfo", "unchecked");
+                    edit.putBoolean("alarm", false).commit();
+                }
             }
         });
     }

@@ -108,7 +108,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginBottom="158dp"
         android:layout_marginRight="18dp"
-        android:background="@color/public_color"
+        android:background="@color/float_btn_color"
         materialdesign:animate="true"
         materialdesign:icon="@drawable/info" />
 

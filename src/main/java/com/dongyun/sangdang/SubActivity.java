@@ -3,6 +3,9 @@ package com.dongyun.sangdang;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 public class SubActivity extends ActionBarActivity {
@@ -90,5 +93,6 @@ public class SubActivity extends ActionBarActivity {
                     }
                 });
     }
+
 
 }
