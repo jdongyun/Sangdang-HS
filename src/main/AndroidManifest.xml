@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.dongyun.sangdang"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="13"
+        android:targetSdkVersion="21" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.Sutaek_Material">
+
+        <receiver android:name="BootReceiver"
+            android:process=":remote"/>
+        <activity
+            android:name="com.dongyun.sangdang.MainActivity"
+            android:icon="@drawable/ic_launcher"
+            android:theme="@style/Theme.Sutaek_Material.Translucent"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.dongyun.sangdang.SubActivity"
+            android:label="@string/allmenu"
+            android:parentActivityName="com.dongyun.sangdang.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dongyun.sangdang.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.dongyun.sangdang.Appinfo"
+            android:label="@string/info"
+            android:parentActivityName="com.dongyun.sangdang.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dongyun.sangdang.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.dongyun.sangdang.Notices"
+            android:label="@string/notices"
+            android:parentActivityName="com.dongyun.sangdang.SubActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dongyun.sangdang.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.dongyun.sangdang.Settings"
+            android:theme="@style/Theme.Sutaek_Material.Translucent"
+            android:label="@string/settings"
+            android:parentActivityName="com.dongyun.sangdang.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dongyun.sangdang.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.dongyun.sangdang.SchoolEvent"
+            android:label="@string/schoolevent"
+            android:parentActivityName="com.dongyun.sangdang.SubActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dongyun.sangdang.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.dongyun.sangdang.Meal"
+            android:label="@string/meal"
+            android:parentActivityName="com.dongyun.sangdang.SubActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dongyun.sangdang.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.dongyun.sangdang.Schoolinfo"
+            android:label="@string/schoolinfo"
+            android:parentActivityName="com.dongyun.sangdang.SubActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dongyun.sangdang.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.dongyun.sangdang.Schedule"
+            android:label="@string/schedule"
+            android:parentActivityName="com.dongyun.sangdang.SubActivity"
+            android:theme="@style/Theme.Sutaek_Material.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dongyun.sangdang.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.dongyun.sangdang.Schoolintro"
+            android:label="@string/schoolintro"
+            android:parentActivityName="com.dongyun.sangdang.SubActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dongyun.sangdang.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.dongyun.sangdang.Notices_Parents"
+            android:label="@string/notices_parents"
+            android:parentActivityName="com.dongyun.sangdang.SubActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dongyun.sangdang.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.dongyun.sangdang.Doc_Readme"
+            android:label="@string/title_activity_doc__readme"
+            android:parentActivityName="com.dongyun.sangdang.Appinfo" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dongyun.sangdang.Appinfo" />
+        </activity>
+        <activity
+            android:name="com.dongyun.sangdang.Doc_Notices"
+            android:label="@string/title_activity_doc__notices"
+            android:parentActivityName="com.dongyun.sangdang.Appinfo" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dongyun.sangdang.Appinfo" />
+        </activity>
+        <activity
+            android:name="com.dongyun.sangdang.Doc_Contributors"
+            android:label="@string/title_activity_doc__contributors"
+            android:parentActivityName="com.dongyun.sangdang.Appinfo" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dongyun.sangdang.Appinfo" />
+        </activity>
+        <activity
+            android:name=".WebViewActivityNotices"
+            android:parentActivityName="com.dongyun.sangdang.Notices" >
+            android:label="@string/title_activity_web_view" >
+        </activity>
+        <activity
+            android:name=".WebViewActivityParent"
+            android:parentActivityName="com.dongyun.sangdang.Notices_Parents" >
+            android:label="@string/title_activity_web_view" >
+        </activity>
+    </application>
+
+</manifest>

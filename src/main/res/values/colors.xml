@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="pressed">#CC6bbc6e</color>
+    <color name="public_color">#ff4baf4f</color>
+    <color name="public_darker_color">#ff368e3a</color>
+    <color name="black">#ff000000</color>
+    <color name="white">#ffffffff</color>
+    <color name="background">#ffe3e3e3</color>
+    <color name="gradient_start">#50000000</color>
+    <color name="gradient_light_start">#30000000</color>
+</resources>

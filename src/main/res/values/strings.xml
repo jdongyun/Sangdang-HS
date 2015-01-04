@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">상당고등학교</string>
+    <string name="notices">공지사항</string>
+    <string name="meal">급식 정보</string>
+    <string name="home">메인</string>
+    <string name="allmenu">전체 메뉴 보기</string>
+    <string name="schoolinfo">상당고등학교 정보</string>
+    <string name="schedule">학사 일정</string>
+    <string name="settings">설정</string>
+    <string name="schoolevent">학교 소식</string>
+    <string name="schoolintro">상당고에 대해서</string>
+    <string name="info">이 앱에 대해서</string>
+    <string name="notices_parents">가정통신문</string>
+    <string name="appsettings_apinfo_title">앱 정보</string>
+    <string name="appsettings_appinfo_src">개발자 Github로 가기</string>
+    <string name="appsettings_docs_title">법적 고지사항 문서</string>
+    <string name="notices_info">학교로부터의 최근 10개 공지사항</string>
+    <string name="noti_parents_info">학교로부터의 최근 10개 가정통신문</string>
+    <string name="meal_info">이번주 급식표</string>
+    <string name="schoolevent_info">학교로부터의 최근 10개 행사</string>
+    <string name="schedule_info">이번 달 학사 일정</string>
+
+    <string name="bf">아침</string>
+    <string name="lunch">점심</string>
+    <string name="dinner">저녁</string>
+    <string name="loading">불러오는 중...</string>
+    <string name="network_connection_warning">네트워크에 연결되어 있지 않습니다, 네트워크 연결을 먼저 확인하세요.</string>
+    <string name="adress">충청북도 청주시 상당구 월평로238번길 3-10\n[Google Maps에서 보려면 클릭]</string>
+    <string name="location">위치</string>
+    <string name="contact">학교와 연락하기</string>
+    <string name="school_office">교무실 : 043-294-6142~3</string>
+    <string name="administration_department">행정실 : 043-294-6144</string>
+    <string name="fax">FAX : 043-294-6145</string>
+    <string name="feat_busin">특색사업</string>
+    <string name="feat_busin_desc_1">
+        1. 교육과학기술부지정 『과목중점형 교과교실 운영학교』
+        \n - 교과교실 환경구축
+        \n - 수학·영어 2+1학급제 수준별 이동수업</string>
+    <string name="feat_busin_desc_2">
+        1. 교육과학기술부지정 『고교 교육력제고 학교』 운영
+        \n - 기초·심화 교육과정 구안 및 적용
+        \n - 학생 선택형 소인수 교육과정 구안 및 적용
+        \n - 학력신장을 위한 다양한 프로그램 구안 및 적용</string>
+
+    <string name="homepage">학교 웹사이트로 이동</string>
+    <string name="school_symbol">학교상징</string>
+    <string name="goal_edu">교육목표</string>
+    <string name="fe_eb">노력중점 및 특색사업</string>
+    <string name="tree">교목 - 소나무</string>
+    <string name="flower">교화 - 철쭉</string>
+    <string name="bird">교조 - 학</string>
+
+    <string name="cb_goal">충북교육지표</string>
+    <string name="cb_goal_desc">능력과 품성을 겸비한 세계인 육성</string>
+
+    <string name="cb_goal_sub_1">조화로운 학력신장</string>
+    <string name="cb_goal_sub_2">미래대비 창조교육</string>
+    <string name="cb_goal_sub_3">진취적인 품성함양</string>
+    <string name="cb_goal_sub_4">신뢰받는 참여행정</string>
+    <string name="cb_goal_sub_5">균형있는 복지구현</string>
+
+
+    <string name="our_philosophy">본교 교육목표</string>
+    <string name="our_philosophy_sub">미래를 주도할 창의적 인재 육성</string>
+.
+    <string name="our_activity_sub_1">
+        1. 도덕인
+        \n - 기본생활습관 및 예절 교육
+        \n - 학교생활 안전교육
+        \n - 질서 및 공중도덕 교육
+        \n - 경로 효친 교육
+    </string>
+    <string name="our_activity_sub_2">
+        2. 건강인
+        \n - 기초 체력의 증진
+        \n - 보건 위생 생활
+        \n - 체험학습을 통한 심신의 단련과 극기심 배양
+        \n - 실내외 환경조성
+    </string>
+    <string name="our_activity_sub_3">
+        3. 봉사인
+        \n - 아가모 운동의 생활화
+        \n - 근검·절약 생활 지도
+        \n - 협동과 봉사정신의 생활화
+        \n - 환경 정화 운동 전개
+    </string>
+    <string name="our_activity_sub_4">
+        4. 창조인
+        \n - 수월과 보편의 조화를 통한 학력제고
+        \n - 다양한 학습기회 제공으로 자기주도적 학습력 배양
+        \n - 적성과 소질 계발
+        \n - 실험 실습과 미래대비 정보화 교육강화
+        \n - 독서를 통한 창의적 사고력 신장
+    </string>
+    <string name="our_activity_sub_5">
+        5. 자주인
+        \n - 자주적인 개성인 육성
+        \n - 참여 의식과 민주적 생활 태도 형성
+        \n - 진취적인 사고를 가진 민주시민 육성
+        \n - 미래 대비 교육
+    </string>
+    <string name="fe_eb_sub_1">
+        가. 학력 제고
+        \n 1. 수월성 교육을 위한 수준별 이동수업 실시
+        \n  - ‘수준별학습을 통한 효율적인 자기주도적 학습력 신장 방안’ 교육과정 시범학교 운영
+        \n 2. 좋은 수업을 확산/지원하는 “수업☆스타” 운영
+        \n  - 심화학습 및 기초 미달학생 특별지도
+    </string>
+    <string name="fe_eb_sub_2">
+        나. 인성 교육 및 전통문화 교육
+        \n 1. 효체험 교육 실시
+        \n 2. 바른생활인 육성을 위한 가치관 정립기록부 활용
+        \n 3. 전통문화 체험 및 직지 교육
+        \n 4. 기본생활습관 및 가치관 형성 지도
+    </string>
+    <string name="fe_eb_sub_3">
+        다. 통합논술 및 독서교육
+        \n 1. 통합논술 및 교육과정과 연계한 독서교육
+        \n 2. 도서관을 활용한 통합교과적 독서교육으로 창조적, 비판적 사고력 함양
+        \n 3. 독서 및 문학동아리 활동의 활성화
+    </string>
+    <string name="fe_eb_sub_4">
+        라. 창의성 계발 중심 교육활동
+        \n 1. 자기주도적 학습력 신장 교육
+        \n  - 교실수업 개선(체험, 실험, 조작, 토론 및 수준별 학습)
+        \n 2. 보충수업 및 특기적성교육 실시
+        \n 3. 창의력 계발을 위한 다양한 동아리 활동 전개
+    </string>
+    <string name="mealnone">급식정보가 존재하지 않습니다.\n(공휴일, 학력고사 등의 이유로 존재하지 않습니다.)</string>
+    <string name="title_activity_doc__readme">README</string>
+    <string name="title_activity_doc__notices">NOTICES</string>
+    <string name="title_activity_doc__copying">COPYING</string>
+    <string name="title_activity_doc__contributors">CONTRIBUTORS</string>
+    <string name="copyright">Copyright ⓒ 2015 정동윤</string>
+    <string name="accept">확인</string>
+    <string name="cancel">취소</string>
+    <string name="title_activity_web_view">상당고등학교</string>
+</resources>
