@@ -60,15 +60,6 @@
                 android:value="com.dongyun.sangdang.MainActivity" />
         </activity>
         <activity
-            android:name="com.dongyun.sangdang.Settings"
-            android:label="@string/settings"
-            android:theme="@style/Theme.Sutaek_Material.Translucent"
-            android:parentActivityName="com.dongyun.sangdang.SubActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dongyun.sangdang.MainActivity" />
-        </activity>
-        <activity
             android:name="com.dongyun.sangdang.SchoolEvent"
             android:screenOrientation="portrait"
             android:label="@string/schoolevent"
