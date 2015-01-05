@@ -49,13 +49,6 @@
             android:textColor="@color/black"
             android:textSize="10dp" />
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/chkbox_alarm"
-            android:id="@+id/chkbox_alarm"
-            android:checked="true"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

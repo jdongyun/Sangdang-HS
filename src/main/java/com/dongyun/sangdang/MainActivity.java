@@ -19,9 +19,9 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         utils = new Utils(this);
         utils.registerAlarm();
+
         getSupportActionBar().setTitle("");
         findViewById(R.id.homepage).setOnClickListener(new OnClickListener() {
 

@@ -44,7 +44,6 @@ public class Utils {
                     SharedPreferences.Editor edit = pref.edit();
                     String num = rawnumdata.text();
 
-
                     DevLog.i("Util", num);
                     int intnum = Integer.parseInt(num);
                     edit.putInt("notice_num_svr", intnum).commit();

@@ -9,11 +9,9 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.gc.materialdesign.views.Button;
-//import com.gc.materialdesign.views.CheckBox;
 
 import de.psdev.licensesdialog.LicensesDialog;
 import de.psdev.licensesdialog.licenses.ApacheSoftwareLicense20;
@@ -68,30 +66,6 @@ public class Appinfo extends ActionBarActivity {
                 startActivity(contrubutors);
             }
         });
-
-        final SharedPreferences pref = getApplicationContext().getSharedPreferences("sangdang", Context.MODE_PRIVATE);
-        final SharedPreferences.Editor edit = pref.edit();
-
-        final CheckBox alarm = (CheckBox) findViewById(R.id.chkbox_alarm);
-        boolean alarm_bool = pref.getBoolean("alarm", true);
-        if(alarm_bool) {
-            alarm.setChecked(true);
-        } else {
-            alarm.setChecked(false);
-        }
-        alarm.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(alarm.isChecked()) {
-                    DevLog.i("AppInfo", "checked");
-                    edit.putBoolean("alarm", true).commit();
-
-                } else {
-                    DevLog.i("AppInfo", "unchecked");
-                    edit.putBoolean("alarm", false).commit();
-                }
-            }
-        });
     }
 
     public void onStop() {
@@ -117,6 +91,7 @@ public class Appinfo extends ActionBarActivity {
         final Notice notice = new Notice(name, url, copyright, license);
         new LicensesDialog.Builder(this).setNotices(notice).build().show();
     }
+
 
 
 }
