@@ -19,6 +19,11 @@
     <string name="notices_info">학교로부터의 최근 10개 공지사항</string>
     <string name="noti_parents_info">학교로부터의 최근 10개 가정통신문</string>
     <string name="meal_info">이번주 급식표</string>
+    <string name="monday">월요일</string>
+    <string name="tuesday">화요일</string>
+    <string name="wednesday">수요일</string>
+    <string name="thursday">목요일</string>
+    <string name="friday">금요일</string>
     <string name="schoolevent_info">학교로부터의 최근 10개 행사</string>
     <string name="schedule_info">이번 달 학사 일정</string>
 
@@ -133,7 +138,7 @@
     <string name="title_activity_doc__notices">NOTICES</string>
     <string name="title_activity_doc__copying">COPYING</string>
     <string name="title_activity_doc__contributors">CONTRIBUTORS</string>
-    <string name="copyright">Copyright ⓒ 2015 정동윤</string>
+    <string name="copyright">Copyright ⓒ 2014, 2017학년도 졸업예정자 정동윤</string>
     <string name="accept">확인</string>
     <string name="cancel">취소</string>
     <string name="title_activity_web_view">상당고등학교</string>

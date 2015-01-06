@@ -7,12 +7,12 @@ import android.util.Log;
  */
 public class DevLog {
     static boolean LOG = true;
-    static void i(String TAG, String LogStr) {
+    public static void i(String TAG, String LogStr) {
         if(LOG) {
             Log.i(TAG, LogStr);
         }
     }
-    static void d(String TAG, String LogStr) {
+    public static void d(String TAG, String LogStr) {
         if(LOG) {
             Log.d(TAG, LogStr);
         }

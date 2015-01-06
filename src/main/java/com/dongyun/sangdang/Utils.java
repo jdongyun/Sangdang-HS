@@ -55,12 +55,14 @@ public class Utils {
                             edit.putInt("notice_num", noticenum).commit();
                             setTrue(false);
                         } else {
-                            if (noticenum >= savednum) {
+                            if (noticenum > savednum) {
+                                int line = noticenum - savednum;
                                 edit.putInt("notice_num", noticenum).commit();
                                 DevLog.i("Utils", Integer.toString(noticenum));
                                 setTrue(true);
                                 Intent in = new Intent(context, BootReceiver.class);
                                 in.putExtra("bool", true);
+                                in.putExtra("line", line);
                                 in.putExtra("title", titledata);
                                 context.sendBroadcast(in);
                                 return;

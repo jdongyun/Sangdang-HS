@@ -1,6 +1,8 @@
 package com.dongyun.sangdang;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -14,7 +16,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -26,9 +27,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Schedule extends ActionBarActivity {
-    ConnectivityManager cManager;
-    NetworkInfo mobile;
-    NetworkInfo wifi;
     private ArrayList<String> dayarray;
     private ArrayList<String> schedulearray;
     private ListCalendarAdapter adapter;
@@ -51,66 +49,79 @@ public class Schedule extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
-        final TextView MonthTxt = (TextView) findViewById(R.id.month);
-        Button Minus = (Button) findViewById(R.id.minus);
-        Button Plus = (Button) findViewById(R.id.plus);
-        Calendar Cal = Calendar.getInstance();
-        month = Cal.get(Calendar.MONTH);
-        monthView = month + 1;
-        year = Cal.get(Calendar.YEAR);
-        yearView = Cal.get(Calendar.YEAR);
+        if (!isNetworkConnected(this)) {
+            new AlertDialog.Builder(this)
+                    .setIcon(R.drawable.ic_error)
+                    .setTitle("네트워크 연결")
+                    .setMessage("\n네트워크 연결 상태 확인 후 다시 시도해 주십시요\n")
+                    .setPositiveButton("확인",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+                                    finish();
+                                }
+                            }).show();
+        } else {
+            final TextView MonthTxt = (TextView) findViewById(R.id.month);
+            Button Minus = (Button) findViewById(R.id.minus);
+            Button Plus = (Button) findViewById(R.id.plus);
+            Calendar Cal = Calendar.getInstance();
+            month = Cal.get(Calendar.MONTH);
+            monthView = month + 1;
+            year = Cal.get(Calendar.YEAR);
+            yearView = Cal.get(Calendar.YEAR);
 
 
+            //http://sangdang.hs.kr/index.jsp?year=2015&month=2&mnu=M001001005001&SCODE=S0000000206
 
-        //http://sangdang.hs.kr/index.jsp?year=2015&month=2&mnu=M001001005001&SCODE=S0000000206
+            MonthTxt.setText(String.valueOf(yearView) + "." + String.valueOf(monthView));
+            Minus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    movement--;
+                    if (monthView == 1) {
+                        monthView = 12;
+                        yearView--;
+                    } else {
+                        monthView--;
+                    }
+                    if (month == 1) {
+                        month = 12;
+                        year--;
+                    } else {
+                        month--;
+                    }
+                    NewURL = "http://sangdang.hs.kr/index.jsp?"
+                            + "year="
+                            + year
+                            + "&month="
+                            + month
+                            + "&mnu=M001001005001&SCODE=S0000000206";
+                    URL = NewURL;
+                    networkTask();
 
-        MonthTxt.setText(String.valueOf(yearView) + "." + String.valueOf(monthView));
-        Minus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                movement--;
-                if(monthView == 1) {
-                    monthView = 12;
-                    yearView--;
-                } else {
-                    monthView--;
+
+                    MonthTxt.setText(String.valueOf(yearView) + "."
+                            + String.valueOf(monthView));
                 }
-                if (month == 1) {
-                    month = 12;
-                    year--;
-                } else {
-                    month--;
-                }
-                NewURL = "http://sangdang.hs.kr/index.jsp?"
-                        + "year="
-                        + year
-                        + "&month="
-                        + month
-                        + "&mnu=M001001005001&SCODE=S0000000206";
-                URL = NewURL;
-                networkTask();
-
-
-                MonthTxt.setText(String.valueOf(yearView) + "."
-                        + String.valueOf(monthView));
-            }
-        });
-        Plus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                movement++;
-                if(monthView == 12) {
-                    monthView = 1;
-                    yearView++;
-                } else {
-                    monthView++;
-                }
-                if (month == 12) {
-                    month = 1;
-                    year++;
-                } else {
-                    month++;
-                }
+            });
+            Plus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    movement++;
+                    if (monthView == 12) {
+                        monthView = 1;
+                        yearView++;
+                    } else {
+                        monthView++;
+                    }
+                    if (month == 12) {
+                        month = 1;
+                        year++;
+                    } else {
+                        month++;
+                    }
                 /*
                 NewURL = "http://www.sutaek.hs.kr/main.php?menugrp=020500&master=diary&act=list&master_sid=1&"
                         + "SearchYear="
@@ -119,49 +130,39 @@ public class Schedule extends ActionBarActivity {
                         + MONTH
                         + "&SearchCategory=&SearchMoveMonth=" + movement;
                         */
-                NewURL = "http://sangdang.hs.kr/index.jsp?"
-                        + "year="
-                        + year
-                        + "&month="
-                        + month
-                        + "&mnu=M001001005001&SCODE=S0000000206";
-                URL = NewURL;
-                networkTask();
+                    NewURL = "http://sangdang.hs.kr/index.jsp?"
+                            + "year="
+                            + year
+                            + "&month="
+                            + month
+                            + "&mnu=M001001005001&SCODE=S0000000206";
+                    URL = NewURL;
+                    networkTask();
 
 
-                MonthTxt.setText(String.valueOf(yearView) + "."
-                        + String.valueOf(monthView));
-            }
-        });
+                    MonthTxt.setText(String.valueOf(yearView) + "."
+                            + String.valueOf(monthView));
+                }
+            });
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        listview = (ListView) findViewById(R.id.listView);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            listview = (ListView) findViewById(R.id.listView);
 
-        cManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        mobile = cManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-        wifi = cManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-        SRL = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
-        SRL.setColorSchemeColors(Color.rgb(231, 76, 60),
-                Color.rgb(46, 204, 113), Color.rgb(41, 128, 185),
-                Color.rgb(241, 196, 15));
-        SRL.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                networkTask();
-            }
-        });
-
-        if (mobile.isConnected() || wifi.isConnected()) {
-        } else {
-            Toast toast = Toast.makeText(getApplicationContext(),
-                    getString(R.string.network_connection_warning),
-                    Toast.LENGTH_LONG);
-            finish();
+            SRL = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+            SRL.setColorSchemeColors(Color.rgb(231, 76, 60),
+                    Color.rgb(46, 204, 113), Color.rgb(41, 128, 185),
+                    Color.rgb(241, 196, 15));
+            SRL.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    networkTask();
+                }
+            });
+            networkTask();
         }
-        networkTask();
 
     }
 
@@ -252,5 +253,25 @@ public class Schedule extends ActionBarActivity {
             }
         }.start();
 
+    }
+
+
+    // 인터넷 연결 상태 체크
+    public boolean isNetworkConnected(Context context) {
+        boolean isConnected = false;
+
+        ConnectivityManager manager = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo mobile = manager
+                .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        NetworkInfo wifi = manager
+                .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+
+        if (mobile.isConnected() || wifi.isConnected()) {
+            isConnected = true;
+        } else {
+            isConnected = false;
+        }
+        return isConnected;
     }
 }

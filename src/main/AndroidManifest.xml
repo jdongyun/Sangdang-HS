@@ -120,15 +120,6 @@
                 android:value="com.dongyun.sangdang.Appinfo" />
         </activity>
         <activity
-            android:name="com.dongyun.sangdang.Doc_Notices"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_doc__notices"
-            android:parentActivityName="com.dongyun.sangdang.Appinfo" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dongyun.sangdang.Appinfo" />
-        </activity>
-        <activity
             android:name="com.dongyun.sangdang.Doc_Contributors"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_doc__contributors"

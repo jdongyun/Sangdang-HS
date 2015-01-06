@@ -15,7 +15,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -24,6 +23,9 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 
 public class SchoolEvent extends ActionBarActivity {
     private ArrayList<String> titlearray;
@@ -73,6 +75,7 @@ public class SchoolEvent extends ActionBarActivity {
                 }
             });
             networkTask();
+            Crouton.makeText(this, R.string.schoolevent_info, Style.INFO).show();
         }
 
     }
@@ -81,7 +84,7 @@ public class SchoolEvent extends ActionBarActivity {
         public void onItemClick(AdapterView<?> adapterView, View clickedView, int pos, long id)
         {
             String herfitem = titleherfarray.get(pos);
-            Intent intent = new Intent(SchoolEvent.this, WebViewActivityNotices.class);
+            Intent intent = new Intent(SchoolEvent.this, WebViewActivityEvent.class);
             intent.putExtra("URL", herfitem);
             startActivity(intent);
         }
@@ -160,10 +163,6 @@ public class SchoolEvent extends ActionBarActivity {
                         listview.setOnItemClickListener(GoToWebPage);
                         handler.sendEmptyMessage(0);
                         SRL.setRefreshing(false);
-
-                        Toast toast = Toast.makeText(getApplicationContext(),
-                                getString(R.string.schoolevent_info), Toast.LENGTH_LONG);
-                        toast.show();
                     }
                 });
 
