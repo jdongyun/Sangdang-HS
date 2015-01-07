@@ -1,21 +1,21 @@
 package com.dongyun.sangdang.meal;
 
 import android.app.Activity;
-import android.graphics.Color;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.dongyun.sangdang.DevLog;
-import com.dongyun.sangdang.MealLoadHelper;
 import com.dongyun.sangdang.R;
+
 public class MondayMeal extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
@@ -24,19 +24,16 @@ public class MondayMeal extends Fragment {
     private String mParam1;
     private String mParam2;
     private OnFragmentInteractionListener mListener;
-    String[] bfstring = new String[7];
-    String[] lunchstring = new String[7];
-    String[] dinnerstring = new String[7];
-    String[] bfkcalstring = new String[7];
-    String[] lunchkcalstring = new String[7];
-    String[] dinnerkcalstring = new String[7];
-    String[] bfpeople = new String[7];
-    String[] lunchpeople = new String[7];
-    String[] dinnerpeople = new String[7];
+    String bfstring;
+    String lunchstring;
+    String dinnerstring;
+    String bfkcalstring;
+    String lunchkcalstring;
+    String dinnerkcalstring;
     TextView BfText;
     TextView LunchText;
     TextView DinnerText;
-    SwipeRefreshLayout SRL;
+    ScrollView sv;
 
     public static MondayMeal newInstance(int sectionNumber) {
         MondayMeal fragment = new MondayMeal();
@@ -45,15 +42,15 @@ public class MondayMeal extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
     public MondayMeal() {
     }
 
 
-    private final Handler handler = new Handler()
-    {
+    private final Handler handler = new Handler() {
         @Override
-        public void handleMessage(Message msg)
-        {}
+        public void handleMessage(Message msg) {
+        }
     };
 
     @Override
@@ -68,23 +65,13 @@ public class MondayMeal extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        SRL = (SwipeRefreshLayout)
+        sv = (ScrollView)
                 inflater.inflate(R.layout.fragment_day_meal, container, false);
-        BfText = (TextView)SRL.findViewById(R.id.bftxt);
-        LunchText = (TextView)SRL.findViewById(R.id.lunchtxt);
-        DinnerText = (TextView)SRL.findViewById(R.id.dinnertxt);
-        SRL.setRefreshing(true);
-        SRL.setColorSchemeColors(Color.rgb(231, 76, 60),
-                Color.rgb(46, 204, 113), Color.rgb(41, 128, 185),
-                Color.rgb(241, 196, 15));
-        SRL.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                loadMealTask();
-            }
-        });
+        BfText = (TextView) sv.findViewById(R.id.bftxt);
+        LunchText = (TextView) sv.findViewById(R.id.lunchtxt);
+        DinnerText = (TextView) sv.findViewById(R.id.dinnertxt);
         loadMealTask();
-        return SRL;
+        return sv;
     }
 
     public void onButtonPressed(Uri uri) {
@@ -109,64 +96,38 @@ public class MondayMeal extends Fragment {
         public void onFragmentInteraction(Uri uri);
     }
 
-    private void loadMealTask(){
-        SRL.setRefreshing(true);
+    private void loadMealTask() {
         final Handler mHandler = new Handler();
-        new Thread()
-        {
 
-            public void run()
-            {
-                mHandler.post(new Runnable(){
-
-                    public void run()
-                    {
-
-                    }
-                });
-                try{
-                    bfstring = MealLoadHelper.getMeal("cbe.go.kr", "M100000159", "4", "04", "1"); //Get BreakFast Menu Date
-                    lunchstring = MealLoadHelper.getMeal("cbe.go.kr", "M100000159", "4", "04", "2"); //Get Lunch Menu Date
-                    dinnerstring = MealLoadHelper.getMeal("cbe.go.kr", "M100000159", "4", "04", "3"); //Get Dinner Menu Date
-                    bfkcalstring = MealLoadHelper.getKcal("cbe.go.kr", "M100000159", "4", "04", "1"); //Get Kcal Data
-                    lunchkcalstring = MealLoadHelper.getKcal("cbe.go.kr", "M100000159", "4", "04", "2"); //Get Kcal Data
-                    dinnerkcalstring = MealLoadHelper.getKcal("cbe.go.kr", "M100000159", "4", "04", "3"); //Get Kcal Data
-                    bfpeople = MealLoadHelper.getPeople("cbe.go.kr", "M100000159", "4", "04", "1"); //Get BreakFast People
-                    lunchpeople = MealLoadHelper.getPeople("cbe.go.kr", "M100000159", "4", "04", "2"); //Get Lunch People
-                    dinnerpeople = MealLoadHelper.getPeople("cbe.go.kr", "M100000159", "4", "04", "3"); //Get Dinner People
-                }catch (Exception e){}
-
-                mHandler.post(new Runnable()
-                {
-                    public void run() {
-
-                        DevLog.d("Setting Text", "Setting Meal Text");
-                        DevLog.d("Mon BreakFast", "BreakFast : " + bfstring[1] + "/ Kcal : " + bfkcalstring[1]);
-                        DevLog.d("Lunch", "Lunch : " + lunchstring[1] + "/ Kcal : " + lunchkcalstring[1]);
-                        DevLog.d("Dinner", "Dinner : " + dinnerstring[1] + "/ Kcal : " + dinnerkcalstring[1]);
-
-                        if (bfstring[1] == null || "".equals(bfstring[1]) || " ".equals(bfstring[1])) {
-                            BfText.setText("\n" + getString(R.string.mealnone));
-                        } else {
-                            BfText.setText("\n" + bfstring[1] + "\n\n" + bfkcalstring[1]);
-                        } if (lunchstring[1] == null || "".equals(lunchstring[1]) || " ".equals(lunchstring[1])) {
-                            LunchText.setText("\n" + getString(R.string.mealnone));
-                        } else {
-                            LunchText.setText("\n" + lunchstring[1] + "\n\n" + lunchkcalstring[1]);
-                        } if (dinnerstring[1] == null || "".equals(dinnerstring[1]) || " ".equals(dinnerstring[1])) {
-                            DinnerText.setText("\n" + getString(R.string.mealnone));
-                        } else {
-                            DinnerText.setText("\n" + dinnerstring[1] + "\n\n" + dinnerkcalstring[1]);
-                        }
+        mHandler.post(new Runnable() {
+            public void run() {
+                SharedPreferences pref = getActivity().getSharedPreferences("sangdang", Context.MODE_PRIVATE);
+                bfstring = pref.getString("meal_bf_1", ""); //Get BreakFast Menu Date
+                lunchstring = pref.getString("meal_lunch_1", ""); //Get Lunch Menu Date
+                dinnerstring = pref.getString("meal_dinner_1", ""); //Get Dinner Menu Date
+                bfkcalstring = pref.getString("meal_bf_kcal_1", ""); //Get Kcal Data
+                lunchkcalstring = pref.getString("meal_lunch_kcal_1", ""); //Get Kcal Data
+                dinnerkcalstring = pref.getString("meal_dinner_kcal_1", ""); //Get Kcal Data
 
 
-                        DevLog.d("DONE", "Done Setting Content");
-                        SRL.setRefreshing(false);
-                        handler.sendEmptyMessage(0);
-
-                    }
-                });
+                if (bfstring == null || "".equals(bfstring) || " ".equals(bfstring)) {
+                    BfText.setText("\n" + getString(R.string.mealnone));
+                } else {
+                    BfText.setText("\n" + bfstring + "\n\n" + bfkcalstring);
+                }
+                if (lunchstring == null || "".equals(lunchstring) || " ".equals(lunchstring)) {
+                    LunchText.setText("\n" + getString(R.string.mealnone));
+                } else {
+                    LunchText.setText("\n" + lunchstring + "\n\n" + lunchkcalstring);
+                }
+                if (dinnerstring == null || "".equals(dinnerstring) || " ".equals(dinnerstring)) {
+                    DinnerText.setText("\n" + getString(R.string.mealnone));
+                } else {
+                    DinnerText.setText("\n" + dinnerstring + "\n\n" + dinnerkcalstring);
+                }
             }
-        }.start();
+
+        });
+        handler.sendEmptyMessage(0);
     }
 }
