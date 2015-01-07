@@ -149,6 +149,7 @@ public class Schedule extends ActionBarActivity {
             setSupportActionBar(toolbar);
 
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_back);
             listview = (ListView) findViewById(R.id.listView);
 
             SRL = (SwipeRefreshLayout) findViewById(R.id.swipe_container);

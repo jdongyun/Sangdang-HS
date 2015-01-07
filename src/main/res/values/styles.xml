@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/public_color</item>
         <item name="colorPrimaryDark">@color/public_darker_color</item>
         <item name="colorAccent">#6bbc6e</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_action_back</item>
+        <item name="homeAsUpIndicator">@drawable/ic_action_back</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
     </style>
 
@@ -22,6 +24,8 @@
         <item name="colorPrimaryDark">@color/public_darker_color</item>
         <item name="colorAccent">#6bbc6e</item>
         <item name="windowActionBar">false</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_action_back</item>
+        <item name="homeAsUpIndicator">@drawable/ic_action_back</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
     </style>
 
