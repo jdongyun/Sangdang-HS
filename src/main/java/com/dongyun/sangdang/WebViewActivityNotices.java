@@ -13,6 +13,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 public class WebViewActivityNotices extends ActionBarActivity {
+
     private WebView mWebView;
     private WebSettings mWebSettings;
 

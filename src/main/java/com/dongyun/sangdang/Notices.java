@@ -85,9 +85,16 @@ public class Notices extends ActionBarActivity {
         public void onItemClick(AdapterView<?> adapterView, View clickedView,
                                 int pos, long id) {
             String herfitem = titleherfarray.get(pos);
+            String title = titlearray.get(pos);
+            String date = datearray.get(pos);
+            String author = authorarray.get(pos);
+
             Intent intent = new Intent(Notices.this,
-                    WebViewActivityParent.class);
+                    NoticesContents.class);
             intent.putExtra("URL", herfitem);
+            intent.putExtra("title", title);
+            intent.putExtra("date", date);
+            intent.putExtra("author", author);
             startActivity(intent);
         }
     };
@@ -147,7 +154,7 @@ public class Notices extends ActionBarActivity {
                     for (Element el : rawmaindata) {
                         String titlherfedata = el.attr("href");
                         String titledata = el.attr("title");
-                        titleherfarray.add("http://www.sangdang.hs.kr/"
+                        titleherfarray.add("http://www.sangdang.hs.kr"
                                 + titlherfedata); // add value to ArrayList
                         titlearray.add(titledata); // add value to ArrayList
                     }

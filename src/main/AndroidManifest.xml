@@ -56,6 +56,24 @@
                 android:value="com.dongyun.sangdang.MainActivity" />
         </activity>
         <activity
+            android:name="com.dongyun.sangdang.NoticesContents"
+            android:screenOrientation="portrait"
+            android:label="@string/notices"
+            android:parentActivityName="com.dongyun.sangdang.Notices" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dongyun.sangdang.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.dongyun.sangdang.NParentsContents"
+            android:screenOrientation="portrait"
+            android:label="@string/notices_parents"
+            android:parentActivityName="com.dongyun.sangdang.Notices_Parents" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dongyun.sangdang.MainActivity" />
+        </activity>
+        <activity
             android:name="com.dongyun.sangdang.SchoolEvent"
             android:screenOrientation="portrait"
             android:label="@string/schoolevent"
@@ -130,12 +148,17 @@
         </activity>
         <activity
             android:name=".WebViewActivityNotices"
-            android:parentActivityName="com.dongyun.sangdang.Notices" >
+            android:parentActivityName="com.dongyun.sangdang.Notices"
             android:label="@string/title_activity_web_view" >
         </activity>
         <activity
             android:name=".WebViewActivityParent"
-            android:parentActivityName="com.dongyun.sangdang.Notices_Parents" >
+            android:parentActivityName="com.dongyun.sangdang.Notices_Parents"
+            android:label="@string/title_activity_web_view" >
+        </activity>
+        <activity
+            android:name=".WebViewActivityEvent"
+            android:parentActivityName="com.dongyun.sangdang.SchoolEvent"
             android:label="@string/title_activity_web_view" >
         </activity>
     </application>
