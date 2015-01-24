@@ -20,7 +20,7 @@ public class SubActivity extends ActionBarActivity {
                     @Override
                     public void onClick(View arg0) {
                         Intent intent = new Intent(SubActivity.this,
-                                Notices.class);
+                                NoticesActivity.class);
                         startActivity(intent);
                     }
                 });

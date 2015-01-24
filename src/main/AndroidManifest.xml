@@ -65,6 +65,15 @@
                 android:value="com.dongyun.sangdang.MainActivity" />
         </activity>
         <activity
+            android:name="com.dongyun.sangdang.NoticesActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/notices"
+            android:parentActivityName="com.dongyun.sangdang.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dongyun.sangdang.MainActivity" />
+        </activity>
+        <activity
             android:name="com.dongyun.sangdang.NParentsContents"
             android:screenOrientation="portrait"
             android:label="@string/notices_parents"

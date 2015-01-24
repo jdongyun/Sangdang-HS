@@ -4,15 +4,19 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -28,7 +32,11 @@ import java.util.ArrayList;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 
-public class Notices_Parents extends ActionBarActivity {
+public class Notices_Parents extends Fragment {
+    Context mContext;
+    public Notices_Parents(Context context) {
+        mContext = context;
+    }
     private ArrayList<String> titlearray;
     private ArrayList<String> titleherfarray;
     private ArrayList<String> authorarray;
@@ -44,12 +52,14 @@ public class Notices_Parents extends ActionBarActivity {
         }
     };
 
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notices_parents);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        if (!isNetworkConnected(this)) {
-            new AlertDialog.Builder(this)
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+        View view = inflater.inflate(R.layout.activity_notices_parents, null);
+        if (!isNetworkConnected(getActivity())) {
+            new AlertDialog.Builder(getActivity())
                     .setIcon(R.drawable.ic_error)
                     .setTitle("네트워크 연결")
                     .setMessage("\n네트워크 연결 상태 확인 후 다시 시도해 주십시요\n")
@@ -58,12 +68,12 @@ public class Notices_Parents extends ActionBarActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog,
                                                     int which) {
-                                    finish();
+                                    //finish();
                                 }
                             }).show();
         } else {
-            listview = (ListView) findViewById(R.id.listView);
-            SRL = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+            listview = (ListView) view.findViewById(R.id.listView);
+            SRL = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
             SRL.setColorSchemeColors(Color.rgb(231, 76, 60),
                     Color.rgb(46, 204, 113), Color.rgb(41, 128, 185),
                     Color.rgb(241, 196, 15));
@@ -74,10 +84,12 @@ public class Notices_Parents extends ActionBarActivity {
                 }
             });
             networkTask();
-            Crouton.makeText(this, R.string.noti_parents_info, Style.INFO).show();
+            Crouton.makeText(getActivity(), R.string.noti_parents_info, Style.INFO).show();
         }
-
+        return view;
     }
+
+
 
     private AdapterView.OnItemClickListener GoToWebPage = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView<?> adapterView, View clickedView,
@@ -87,7 +99,7 @@ public class Notices_Parents extends ActionBarActivity {
             String date = datearray.get(pos);
             String author = authorarray.get(pos);
 
-            Intent intent = new Intent(Notices_Parents.this,
+            Intent intent = new Intent(getActivity(),
                     NParentsContents.class);
             intent.putExtra("URL", herfitem);
             intent.putExtra("title", title);
@@ -172,7 +184,7 @@ public class Notices_Parents extends ActionBarActivity {
                 mHandler.post(new Runnable() {
                     public void run() {
                         // UI Task
-                        adapter = new PostListAdapter(Notices_Parents.this,
+                        adapter = new PostListAdapter(getActivity(),
                                 titlearray, datearray, authorarray);
                         listview.setAdapter(adapter);
                         listview.setOnItemClickListener(GoToWebPage);

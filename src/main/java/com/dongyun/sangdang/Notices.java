@@ -5,15 +5,19 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -29,7 +33,11 @@ import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 
 
-public class Notices extends ActionBarActivity {
+public class Notices extends Fragment {
+    Context mContext;
+    public Notices(Context context) {
+        mContext = context;
+    }
 
     private ArrayList<String> titlearray;
     private ArrayList<String> titleherfarray;
@@ -46,12 +54,12 @@ public class Notices extends ActionBarActivity {
         }
     };
 
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notices);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        if (!isNetworkConnected(this)) {
-            new AlertDialog.Builder(this)
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+        View view = inflater.inflate(R.layout.activity_notices, null);
+        if (!isNetworkConnected(mContext)) {
+            new AlertDialog.Builder(mContext)
                     .setIcon(R.drawable.ic_error)
                     .setTitle("네트워크 연결")
                     .setMessage("\n네트워크 연결 상태 확인 후 다시 시도해 주십시요\n")
@@ -60,12 +68,12 @@ public class Notices extends ActionBarActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog,
                                                     int which) {
-                                    finish();
+                                    //finish();
                                 }
                             }).show();
         } else {
-            listview = (ListView) findViewById(R.id.listView);
-            SRL = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+            listview = (ListView) view.findViewById(R.id.listView);
+            SRL = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
             SRL.setColorSchemeColors(Color.rgb(231, 76, 60),
                     Color.rgb(46, 204, 113), Color.rgb(41, 128, 185),
                     Color.rgb(241, 196, 15));
@@ -76,9 +84,9 @@ public class Notices extends ActionBarActivity {
                 }
             });
             networkTask();
-            Crouton.makeText(this, R.string.notices_info , Style.INFO).show();
+            Crouton.makeText(getActivity(), R.string.notices_info , Style.INFO).show();
         }
-
+        return view;
     }
 
     private AdapterView.OnItemClickListener GoToWebPage = new AdapterView.OnItemClickListener() {
@@ -89,7 +97,7 @@ public class Notices extends ActionBarActivity {
             String date = datearray.get(pos);
             String author = authorarray.get(pos);
 
-            Intent intent = new Intent(Notices.this,
+            Intent intent = new Intent(getActivity(),
                     NoticesContents.class);
             intent.putExtra("URL", herfitem);
             intent.putExtra("title", title);
@@ -183,7 +191,7 @@ public class Notices extends ActionBarActivity {
                     public void run() {
                         // UI Task
                         // 배열로 어뎁터 설정
-                        adapter = new PostListAdapter(Notices.this, titlearray,
+                        adapter = new PostListAdapter(getActivity(), titlearray,
                                 datearray, authorarray);
                         listview.setAdapter(adapter);
                         listview.setOnItemClickListener(GoToWebPage);
