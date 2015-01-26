@@ -34,10 +34,6 @@ import de.keyboardsurfer.android.widget.crouton.Style;
 
 
 public class Notices extends Fragment {
-    Context mContext;
-    public Notices(Context context) {
-        mContext = context;
-    }
 
     private ArrayList<String> titlearray;
     private ArrayList<String> titleherfarray;
@@ -58,8 +54,8 @@ public class Notices extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
         View view = inflater.inflate(R.layout.activity_notices, null);
-        if (!isNetworkConnected(mContext)) {
-            new AlertDialog.Builder(mContext)
+        if (!isNetworkConnected(getActivity())) {
+            new AlertDialog.Builder(getActivity())
                     .setIcon(R.drawable.ic_error)
                     .setTitle("네트워크 연결")
                     .setMessage("\n네트워크 연결 상태 확인 후 다시 시도해 주십시요\n")

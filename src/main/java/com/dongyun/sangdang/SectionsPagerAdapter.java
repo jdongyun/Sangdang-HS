@@ -21,10 +21,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // below) with the page number as its lone argument.
         switch (position) {
             case 0:
-
-                return new Notices(mContext);
+                return new Notices();
             case 1:
-                return new Notices_Parents(mContext);
+                return new Notices_Parents();
         }
         return null;
     }

@@ -33,10 +33,6 @@ import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 
 public class Notices_Parents extends Fragment {
-    Context mContext;
-    public Notices_Parents(Context context) {
-        mContext = context;
-    }
     private ArrayList<String> titlearray;
     private ArrayList<String> titleherfarray;
     private ArrayList<String> authorarray;
