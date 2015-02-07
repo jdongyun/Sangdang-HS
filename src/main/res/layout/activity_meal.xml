@@ -8,7 +8,7 @@
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.codejune.sutaekhighschool.Meal" />
+        tools:context="com.dongyun.sangdang.activity.Meal" />
     <com.gc.materialdesign.views.ButtonFloat
         android:id="@+id/mealinfo"
         android:layout_width="wrap_content"

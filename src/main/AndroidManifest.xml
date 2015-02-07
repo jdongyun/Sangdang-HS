@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dongyun.sangdang"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionCode="2"
+    android:versionName="1.0.1" >
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,15 +13,15 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/Theme.Sutaek_Material">
+        android:theme="@style/Theme.Sangdang_Material">
 
-        <receiver android:name="BootReceiver"
+        <receiver android:name=".util.BootReceiver"
             android:process=":remote"/>
         <activity
-            android:name="com.dongyun.sangdang.IntroActivity"
+            android:name="com.dongyun.sangdang.activity.MainActivity"
             android:screenOrientation="portrait"
             android:icon="@drawable/ic_launcher"
-            android:theme="@style/Theme.Sutaek_Material"
+            android:theme="@style/Theme.Sutaek_Material.NoActionBar"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,145 +29,102 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.dongyun.sangdang.SubActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/allmenu"
-            android:parentActivityName="com.dongyun.sangdang.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dongyun.sangdang.MainActivity" />
-        </activity>
-        <activity
-            android:name="com.dongyun.sangdang.Appinfo"
+            android:name=".activity.Appinfo"
             android:screenOrientation="portrait"
             android:label="@string/info"
-            android:parentActivityName="com.dongyun.sangdang.MainActivity" >
+            android:parentActivityName=".activity.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dongyun.sangdang.MainActivity" />
+                android:value=".activity.MainActivity" />
         </activity>
         <activity
-            android:name="com.dongyun.sangdang.Notices"
+            android:name=".activity.NoticesContents"
+            android:screenOrientation="portrait"
+            android:label="@string/notices" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dongyun.sangdang.activity.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activity.EventsContents"
+            android:screenOrientation="portrait"
+            android:label="@string/schoolevent" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dongyun.sangdang.activity.SchoolEvent" />
+        </activity>
+        <activity
+            android:name="com.dongyun.sangdang.activity.NoticesActivity"
             android:screenOrientation="portrait"
             android:label="@string/notices"
-            android:parentActivityName="com.dongyun.sangdang.SubActivity" >
+            android:theme="@style/Theme.Sutaek_Material.NoActionBar"
+            android:parentActivityName="com.dongyun.sangdang.activity.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dongyun.sangdang.MainActivity" />
+                android:value="com.dongyun.sangdang.activity.MainActivity" />
         </activity>
         <activity
-            android:name="com.dongyun.sangdang.NoticesContents"
+            android:name=".activity.NParentsContents"
             android:screenOrientation="portrait"
-            android:label="@string/notices"
-            android:parentActivityName="com.dongyun.sangdang.Notices" >
+            android:label="@string/notices_parents">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dongyun.sangdang.MainActivity" />
+                android:value="com.dongyun.sangdang.activity.MainActivity" />
         </activity>
         <activity
-            android:name="com.dongyun.sangdang.NoticesActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/notices"
-            android:parentActivityName="com.dongyun.sangdang.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dongyun.sangdang.MainActivity" />
-        </activity>
-        <activity
-            android:name="com.dongyun.sangdang.NParentsContents"
-            android:screenOrientation="portrait"
-            android:label="@string/notices_parents"
-            android:parentActivityName="com.dongyun.sangdang.Notices_Parents" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dongyun.sangdang.MainActivity" />
-        </activity>
-        <activity
-            android:name="com.dongyun.sangdang.SchoolEvent"
+            android:name=".activity.SchoolEvent"
             android:screenOrientation="portrait"
             android:label="@string/schoolevent"
-            android:parentActivityName="com.dongyun.sangdang.SubActivity" >
+            android:parentActivityName="com.dongyun.sangdang.activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dongyun.sangdang.MainActivity" />
+                android:value="com.dongyun.sangdang.activity.MainActivity" />
         </activity>
         <activity
-            android:name="com.dongyun.sangdang.Meal"
+            android:name=".activity.Meal"
             android:screenOrientation="portrait"
-            android:label="@string/meal"
-            android:parentActivityName="com.dongyun.sangdang.SubActivity" >
+            android:label="@string/meal" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dongyun.sangdang.MainActivity" />
+                android:value="com.dongyun.sangdang.activity.MainActivity" />
         </activity>
         <activity
-            android:name="com.dongyun.sangdang.Schoolinfo"
-            android:screenOrientation="portrait"
-            android:label="@string/schoolinfo"
-            android:parentActivityName="com.dongyun.sangdang.SubActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dongyun.sangdang.MainActivity" />
-        </activity>
-        <activity
-            android:name="com.dongyun.sangdang.Schedule"
+            android:name=".activity.Schedule"
             android:screenOrientation="portrait"
             android:label="@string/schedule"
-            android:parentActivityName="com.dongyun.sangdang.SubActivity"
             android:theme="@style/Theme.Sutaek_Material.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dongyun.sangdang.MainActivity" />
+                android:value="com.dongyun.sangdang.activity.MainActivity" />
         </activity>
         <activity
-            android:name="com.dongyun.sangdang.Schoolintro"
+            android:name=".activity.Schoolintro"
             android:screenOrientation="portrait"
-            android:label="@string/schoolintro"
-            android:parentActivityName="com.dongyun.sangdang.SubActivity" >
+            android:label="@string/schoolintro" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dongyun.sangdang.MainActivity" />
+                android:value="com.dongyun.sangdang.activity.MainActivity" />
         </activity>
         <activity
-            android:name="com.dongyun.sangdang.Notices_Parents"
-            android:screenOrientation="portrait"
-            android:label="@string/notices_parents"
-            android:parentActivityName="com.dongyun.sangdang.SubActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dongyun.sangdang.MainActivity" />
-        </activity>
-        <activity
-            android:name="com.dongyun.sangdang.Doc_Readme"
+            android:name=".activity.Doc_Readme"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_doc__readme"
-            android:parentActivityName="com.dongyun.sangdang.Appinfo" >
+            android:parentActivityName=".activity.Appinfo" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dongyun.sangdang.Appinfo" />
+                android:value=".activity.Appinfo" />
         </activity>
         <activity
-            android:name="com.dongyun.sangdang.Doc_Contributors"
+            android:name=".activity.Doc_Contributors"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_doc__contributors"
-            android:parentActivityName="com.dongyun.sangdang.Appinfo" >
+            android:parentActivityName=".activity.Appinfo" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dongyun.sangdang.Appinfo" />
+                android:value=".activity.Appinfo" />
         </activity>
         <activity
-            android:name=".WebViewActivityNotices"
-            android:parentActivityName="com.dongyun.sangdang.Notices"
-            android:label="@string/title_activity_web_view" >
-        </activity>
-        <activity
-            android:name=".WebViewActivityParent"
-            android:parentActivityName="com.dongyun.sangdang.Notices_Parents"
-            android:label="@string/title_activity_web_view" >
-        </activity>
-        <activity
-            android:name=".WebViewActivityEvent"
-            android:parentActivityName="com.dongyun.sangdang.SchoolEvent"
+            android:name=".activity.WebViewActivity"
             android:label="@string/title_activity_web_view" >
         </activity>
     </application>

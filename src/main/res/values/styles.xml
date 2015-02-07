@@ -2,30 +2,20 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
     </style>
 
-    <style name="Theme.Sutaek_Material" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="Theme.Sangdang_Material" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/public_color</item>
         <item name="colorPrimaryDark">@color/public_darker_color</item>
         <item name="colorAccent">#6bbc6e</item>
-        <item name="android:homeAsUpIndicator">@drawable/ic_action_back</item>
-        <item name="homeAsUpIndicator">@drawable/ic_action_back</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
-    </style>
-
-    <style name="Theme.Sutaek_Material.Translucent">
-        <item name="colorPrimary">@android:color/transparent</item>
-        <item name="colorPrimaryDark">@color/public_darker_color</item>
-        <item name="colorAccent">#6bbc6e</item>
-        <item name="windowActionBarOverlay">true</item>
-        <item name="android:windowContentOverlay">@null</item>
     </style>
 
     <style name="Theme.Sutaek_Material.NoActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/public_color</item>
         <item name="colorPrimaryDark">@color/public_darker_color</item>
-        <item name="colorAccent">#6bbc6e</item>
+        <item name="colorAccent">@color/yellow</item>
         <item name="windowActionBar">false</item>
-        <item name="android:homeAsUpIndicator">@drawable/ic_action_back</item>
-        <item name="homeAsUpIndicator">@drawable/ic_action_back</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <!-- Navigation Drawer Arrow Style. -->
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
     </style>
 
@@ -48,5 +38,12 @@
         <item name="android:navigationIcon">?attr/homeAsUpIndicator</item>
         <item name="navigationIcon">?attr/homeAsUpIndicator</item>
     </style>
+
+
+    <style name="menu_labels_style">
+        <item name="android:background">@drawable/fab_label_background</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 
 </resources>

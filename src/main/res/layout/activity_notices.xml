@@ -28,9 +28,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/listView"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="10dp"
+            android:clipToPadding="false"
+            android:scrollbarStyle="outsideOverlay"
             android:layout_alignParentRight="true"
+            android:padding="10dp"
             android:layout_alignParentEnd="true"
-            android:layout_below="@+id/textView"
-            android:padding="8dp"/>
+            android:layout_below="@+id/textView"/>
     </android.support.v4.widget.SwipeRefreshLayout>
 </RelativeLayout>
