@@ -107,7 +107,7 @@ public class NParentsContents extends ActionBarActivity {
                         rawcontents = doc.select("#m_mainView tbody tr#m_content td");
                     }
 
-                    Elements rawfile = doc.select("#m_mainView tbody tr td p a");
+                    Elements rawfile = doc.select("#m_mainView tbody tr:eq(3) td p a");
 
                     for (Element el : rawcontents) {
                         String con = el.text();

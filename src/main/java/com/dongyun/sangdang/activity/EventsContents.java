@@ -122,7 +122,7 @@ public class EventsContents extends ActionBarActivity {
                         imagesrc = imagesrc + str.attr("src") + "\n";
                     }
 
-                    Elements rawfile = doc.select("#m_mainView tbody tr td p a");
+                    Elements rawfile = doc.select("#m_mainView tbody tr:eq(3) td p a");
                     for (Element el : rawfile) {
                         String filedata = "http://sangdang.hs.kr" + el.attr("href");
                         String filetitle = el.text();
