@@ -29,7 +29,6 @@
     <string name="bf">아침</string>
     <string name="lunch">점심</string>
     <string name="dinner">저녁</string>
-    <string name="loading">불러오는 중...</string>
     <string name="network_connection_warning">네트워크에 연결되어 있지 않습니다, 네트워크 연결을 먼저 확인하세요.</string>
     <string name="adress">충청북도 청주시 상당구 월평로238번길 3-10\n[Google Maps에서 보려면 클릭]</string>
     <string name="location">위치</string>
@@ -144,6 +143,6 @@
     <string name="drawer_open">Drawer Open</string>
     <string name="drawer_close">Drawer Close</string>
     <string name="error">홈페이지를 로드할 수 없습니다.</string>
-    <string name="not_loaded_yet">\n아직 로드되지 않음..</string>
+    <string name="not_loaded_yet">아직 로드되지 않았습니다.\n아래로 스와이프하여 갱신하기</string>
     <string name="notices_main">학부모 공지사항</string>
 </resources>

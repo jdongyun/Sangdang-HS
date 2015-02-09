@@ -3,6 +3,7 @@ package com.dongyun.sangdang.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -70,6 +71,8 @@ public class Favorites extends Fragment {
     private TextView DAY;
     private TextView mMealTime;
 
+    private SwipeRefreshLayout SRL;
+
     SharedPreferences sp;
     View view;
 
@@ -92,6 +95,27 @@ public class Favorites extends Fragment {
         DAY = (TextView) view.findViewById(R.id.day);
         mMealTime = (TextView) view.findViewById(R.id.mealtime);
 
+        SRL = (SwipeRefreshLayout)view.findViewById(R.id.swiperefresh);
+        SRL.setColorSchemeColors(Color.rgb(231, 76, 60),
+                Color.rgb(46, 204, 113), Color.rgb(41, 128, 185),
+                Color.rgb(241, 196, 15));
+
+        SRL.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (!isNetworkConnected(getActivity())) {
+                    Crouton.makeText(getActivity(), R.string.network_connection_warning, Style.INFO).show();
+                    SRL.setRefreshing(false);
+                }
+                else{
+                    if (sp.getBoolean("meal", true) && isNetworkConnected(getActivity())) getMeal();
+                    if (sp.getBoolean("notices_parents", true) && isNetworkConnected(getActivity())) getNParents();
+                    if (sp.getBoolean("schedule", true) && isNetworkConnected(getActivity())) getSchedule();
+                    if (sp.getBoolean("event", true) && isNetworkConnected(getActivity())) getEvent();
+                }
+            }
+        });
+
         View meal = view.findViewById(R.id.meal);
         View notices_parents = view.findViewById(R.id.notices_parents);
         View events = view.findViewById(R.id.events);
@@ -99,25 +123,37 @@ public class Favorites extends Fragment {
         sp = getActivity().getSharedPreferences("sangdang_pref", Context.MODE_PRIVATE);
 
         if (sp.getBoolean("meal", true)) {
-            meal.setVisibility(View.VISIBLE);
+                meal.setVisibility(View.VISIBLE);
+                if (isNetworkConnected(getActivity())) {
+                    getMeal();
+                }
         } else {
             meal.setVisibility(View.GONE);
         }
 
         if (sp.getBoolean("notices_parents", true)) {
             notices_parents.setVisibility(View.VISIBLE);
+            if (isNetworkConnected(getActivity())) {
+                getNParents();
+            }
         } else {
             notices_parents.setVisibility(View.GONE);
         }
 
         if (sp.getBoolean("event", true)) {
             events.setVisibility(View.VISIBLE);
+            if (isNetworkConnected(getActivity())) {
+                getEvent();
+            }
         } else {
             events.setVisibility(View.GONE);
         }
 
         if (sp.getBoolean("schedule", true)) {
             schedule.setVisibility(View.VISIBLE);
+            if (isNetworkConnected(getActivity())) {
+                getSchedule();
+            }
         } else {
             schedule.setVisibility(View.GONE);
         }
@@ -129,7 +165,6 @@ public class Favorites extends Fragment {
                 startActivity(intent);
             }
         });
-
 
         notices_parents.setOnClickListener(new OnClickListener() {
             @Override
@@ -156,21 +191,13 @@ public class Favorites extends Fragment {
             }
         });
 
-
-        if (!isNetworkConnected(getActivity())) {
-        } else {
-            networkTask();
+        if (isNetworkConnected(getActivity())) {
+            //networkTask();
         }
         return view;
     }
 
-
     void networkTask() {
-        final Handler handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-            }
-        };
 
         final Handler mHandler = new Handler();
         new Thread() {
@@ -186,6 +213,7 @@ public class Favorites extends Fragment {
                     dinnerstring = MealLoadHelper.getMeal("cbe.go.kr", "M100000159", "4", "04", "3"); //Get Dinner Menu Date
                 } catch (Exception e) {
                 }
+
 
                 try {
                     titlearray_np = new ArrayList<String>();
@@ -215,6 +243,7 @@ public class Favorites extends Fragment {
 
                 }
 
+
                 try {
                     titlearray_ev = new ArrayList<String>();
                     datearray_ev = new ArrayList<String>();
@@ -243,26 +272,15 @@ public class Favorites extends Fragment {
 
                 }
 
+
                 try {
                     titlearray_sc = new ArrayList<String>();
                     Document doc = Jsoup.connect("http://www.sangdang.hs.kr/index.jsp?SCODE=S0000000206&mnu=M001001005").get();
                     Elements rawscheduledata = doc.select("#s_menuContent #m_content table tbody tr td div.fwn"); // Get
-                    // contents
-                    // from
-                    // tags,"a"
-                    // which
-                    // are
-                    // in
-                    // the
-                    // class,"ellipsis"
+
                     for (Element el : rawscheduledata) {
                         String scheduledata = el.text();
-                        //if (skip > 0) {
-                        //    skip--;
-                        //} else {
-                            titlearray_sc.add(scheduledata); // add value to
-                            // ArrayList
-                        //}
+                        titlearray_sc.add(scheduledata);
                     }
                     DevLog.d("Schedule", titlearray_sc.toString());
                 } catch (IOException e) {
@@ -275,7 +293,6 @@ public class Favorites extends Fragment {
                     public void run() {
                         if (AMorPM == Calendar.AM) {
                             mMealString = lunchstring[DAYofWEEK - 1];
-                            DevLog.i("MEAL", lunchstring[0]);
                             mMealTime.setText(R.string.lunch);
                             mMealView.setText("hihi");
                         } else {
@@ -290,17 +307,18 @@ public class Favorites extends Fragment {
                             mEventDate = datearray_ev.get(0);
                             Date d = new Date();
                             SimpleDateFormat sdf = new SimpleDateFormat("dd");
-                            mScheduleTitle = titlearray_sc.get(Integer.parseInt(sdf.format(d)) -1);
+                            mScheduleTitle = titlearray_sc.get(Integer.parseInt(sdf.format(d)) - 1);
+                            if (mMealString.trim().equals("")) {
+                                mMealString = getResources().getString(R.string.mealnone);
+                            }
                         } catch (Exception e) {
                             mNoticesParentString = getResources().getString(R.string.error);
                             mEventString = getResources().getString(R.string.error);
                             mScheduleTitle = getResources().getString(R.string.error);
                         }
 
-                        if (mMealString.trim().equals("")) {
-                            mMealString = getResources().getString(R.string.mealnone);
-                        }
-                        handler.sendEmptyMessage(0);
+
+                        mHandler.sendEmptyMessage(0);
                         setContentData();
                     }
                 });
@@ -310,6 +328,218 @@ public class Favorites extends Fragment {
 
 
     }
+    public void getMeal() {
+        SRL.setRefreshing(true);
+        final Handler mHandler = new Handler();
+        new Thread() {
+
+            public void run() {
+                try {
+                    lunchstring = MealLoadHelper.getMeal("cbe.go.kr", "M100000159", "4", "04", "2"); //Get Lunch Menu Date
+                    dinnerstring = MealLoadHelper.getMeal("cbe.go.kr", "M100000159", "4", "04", "3"); //Get Dinner Menu Date
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                mHandler.post(new Runnable() {
+                    public void run() {
+                        if (AMorPM == Calendar.AM) {
+                            mMealString = lunchstring[DAYofWEEK - 1];
+                            mMealTime.setText(R.string.lunch);
+                            mMealView.setText("hihi");
+                        } else {
+                            mMealString = dinnerstring[DAYofWEEK - 1] + "\n";
+                            mMealTime.setText(R.string.dinner);
+                            mMealView.setText("hihi");
+                        }
+                        if (mMealString.trim().equals("")) {
+                            mMealString = getResources().getString(R.string.mealnone);
+                        }
+
+                        SRL.setRefreshing(false);
+                        mHandler.sendEmptyMessage(0);
+                        TimeZone kst = TimeZone.getTimeZone("KST");
+                        Calendar cal = Calendar.getInstance(kst);
+                        mMealView.setText(mMealString);
+                        DAY.setText((cal.get(Calendar.MONTH) + 1) + "월 "
+                                + cal.get(Calendar.DATE) + "일 ");
+                    }
+                });
+
+            }
+        }.start();
+
+
+    }
+
+    void getNParents() {
+        SRL.setRefreshing(true);
+
+        final Handler mHandler = new Handler();
+        new Thread() {
+
+            public void run() {
+                try {
+                    titlearray_np = new ArrayList<String>();
+                    datearray_np = new ArrayList<String>();
+                    Document doc = Jsoup.connect("http://www.sangdang.hs.kr/index.jsp?SCODE=S0000000206&mnu=M001006002").get();
+                    Elements rawdata = doc.select("#m_mainList tbody tr td div.m_ltitle a");
+                    Elements rawdatedata = doc.select("td:eq(3)");
+                    String titlestring = rawdata.toString();
+                    DevLog.i("Notices", "Parsed Strings" + titlestring);
+
+                    for (Element el : rawdata) {
+                        String titledata = el.attr("title");
+                        titlearray_np.add(titledata); // add value to ArrayList
+                    }
+
+                    for (Element el : rawdatedata) {
+                        String datedata = el.text();
+                        DevLog.d("Date", el.text());
+                        datearray_np.add(datedata);
+                    }
+
+                    DevLog.i("Notices", "Parsed Array Strings" + titlearray_np);
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+
+                }
+
+
+                mHandler.post(new Runnable() {
+                    public void run() {
+                        try {
+                            mNoticesParentString = titlearray_np.get(0);
+                            mNoticesParentDate = datearray_np.get(0);
+                        } catch (Exception e) {
+                            mNoticesParentString = getResources().getString(R.string.error);
+                        }
+
+                        mHandler.sendEmptyMessage(0);
+                        SRL.setRefreshing(false);
+                        mNParentsTitleView.setText(mNoticesParentString);
+                        mNParentsDateView.setText("등록일 : " + mNoticesParentDate);
+                    }
+                });
+
+            }
+        }.start();
+    }
+
+
+    void getEvent() {
+        SRL.setRefreshing(true);
+
+        final Handler mHandler = new Handler();
+        new Thread() {
+
+            public void run() {
+
+
+                try {
+                    titlearray_ev = new ArrayList<String>();
+                    datearray_ev = new ArrayList<String>();
+                    Document doc = Jsoup.connect("http://sangdang.hs.kr/index.jsp?SCODE=S0000000206&mnu=M001006001").get();
+                    Elements rawdata = doc.select("#m_mainList tbody tr td div.m_ltitle a");
+                    Elements rawdatedata = doc.select("td:eq(3)");
+                    String titlestring = rawdata.toString();
+                    DevLog.i("Notices", "Parsed Strings" + titlestring);
+
+                    for (Element el : rawdata) {
+                        String titledata = el.attr("title");
+                        titlearray_ev.add(titledata); // add value to ArrayList
+                    }
+
+                    for (Element el : rawdatedata) {
+                        String datedata = el.text();
+                        DevLog.d("Date", el.text());
+                        datearray_ev.add(datedata);
+                    }
+
+                    DevLog.i("Notices", "Parsed Array Strings" + titlearray_np);
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+
+                }
+
+
+
+                mHandler.post(new Runnable() {
+                    public void run() {
+                        try {
+                            mEventString = titlearray_ev.get(0);
+                            mEventDate = datearray_ev.get(0);
+                        } catch (Exception e) {
+                            mEventString = getResources().getString(R.string.error);
+                        }
+
+
+                        mHandler.sendEmptyMessage(0);
+                        SRL.setRefreshing(false);
+                        mEventTitleView.setText(mEventString);
+                        mEventsDateView.setText("등록일 : " + mEventDate);
+                    }
+                });
+
+            }
+        }.start();
+    }
+
+    void getSchedule() {
+        SRL.setRefreshing(true);
+
+        final Handler mHandler = new Handler();
+        new Thread() {
+
+            public void run() {
+
+
+                try {
+                    titlearray_sc = new ArrayList<String>();
+                    Document doc = Jsoup.connect("http://www.sangdang.hs.kr/index.jsp?SCODE=S0000000206&mnu=M001001005").get();
+                    Elements rawscheduledata = doc.select("#s_menuContent #m_content table tbody tr td div.fwn"); // Get
+
+                    for (Element el : rawscheduledata) {
+                        String scheduledata = el.text();
+                        titlearray_sc.add(scheduledata);
+                    }
+                    DevLog.d("Schedule", titlearray_sc.toString());
+                } catch (IOException e) {
+                    e.printStackTrace();
+
+                }
+
+
+                mHandler.post(new Runnable() {
+                    public void run() {
+                        try {
+                            Date d = new Date();
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd");
+                            mScheduleTitle = titlearray_sc.get(Integer.parseInt(sdf.format(d)) - 1);
+                        } catch (Exception e) {
+                            mScheduleTitle = getResources().getString(R.string.error);
+                        }
+
+                        mHandler.sendEmptyMessage(0);
+                        SRL.setRefreshing(false);
+                        if (mScheduleTitle.equals("")) {
+                            mScheduleTitleView.setText("오늘의 일정이 없습니다.");
+                        } else {
+                            mScheduleTitleView.setText("오늘의 일정 : " + mScheduleTitle);
+                        }
+                    }
+                });
+
+            }
+        }.start();
+
+    }
+
+
 
     @Override
     public void onResume() {
@@ -321,45 +551,48 @@ public class Favorites extends Fragment {
 
         if (sp.getBoolean("meal", true)) {
             meal.setVisibility(View.VISIBLE);
+            if (isNetworkConnected(getActivity())) {
+                getMeal();
+            }
         } else {
             meal.setVisibility(View.GONE);
         }
 
         if (sp.getBoolean("notices_parents", true)) {
             notices_parents.setVisibility(View.VISIBLE);
+            if (isNetworkConnected(getActivity())) {
+                getNParents();
+            }
         } else {
             notices_parents.setVisibility(View.GONE);
         }
 
         if (sp.getBoolean("event", true)) {
             events.setVisibility(View.VISIBLE);
+            if (isNetworkConnected(getActivity())) {
+                getEvent();
+            }
         } else {
             events.setVisibility(View.GONE);
         }
 
         if (sp.getBoolean("schedule", true)) {
             schedule.setVisibility(View.VISIBLE);
+            if (isNetworkConnected(getActivity())) {
+                getSchedule();
+            }
         } else {
             schedule.setVisibility(View.GONE);
         }
     }
 
     void setContentData() {
-        TimeZone kst = TimeZone.getTimeZone("KST");
-        Calendar cal = Calendar.getInstance(kst);
-        mMealView.setText(mMealString);
-        mNParentsTitleView.setText(mNoticesParentString);
-        mNParentsDateView.setText("등록일 : " + mNoticesParentDate);
-        mEventTitleView.setText(mEventString);
-        mEventsDateView.setText("등록일 : " + mEventDate);
-        if(mScheduleTitle.equals("")) {
-            mScheduleTitleView.setText("오늘의 일정이 없습니다.");
-        } else {
-            mScheduleTitleView.setText("오늘의 일정 : " + mScheduleTitle);
-        }
 
-        DAY.setText((cal.get(Calendar.MONTH) + 1) + "월 "
-                + cal.get(Calendar.DATE) + "일 ");
+
+
+
+
+
     }
 
     // 인터넷 연결 상태 체크

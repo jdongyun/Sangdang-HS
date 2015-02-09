@@ -107,14 +107,14 @@ public class NoticesContents extends ActionBarActivity {
                         rawcontents = doc.select("#m_mainView tbody tr#m_content td");
                     }
 
-                    Elements rawfile = doc.select("#m_mainView tbody tr td p a");
-
                     for (Element el : rawcontents) {
                         String con = el.text();
                         con = con.trim();
                         DevLog.i("CONS", con);
                         cons = cons + con + "\n";
                     }
+
+                    Elements rawfile = doc.select("#m_mainView tbody tr td p a");
                     for (Element el : rawfile) {
                         String filedata = "http://sangdang.hs.kr" + el.attr("href");
                         //filedata = URLEncoder.encode(filedata, "EUC_KR");
