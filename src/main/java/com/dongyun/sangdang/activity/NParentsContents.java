@@ -117,7 +117,6 @@ public class NParentsContents extends ActionBarActivity {
                     }
                     for (Element el : rawfile) {
                         String filedata = "http://sangdang.hs.kr" + el.attr("href");
-                        //filedata = URLEncoder.encode(filedata, "EUC_KR");
                         String filetitle = el.text();
                         filename = filename + "<a href=\""
                                 + filedata.replace("/common/", "/m/") //모바일 다운로드시 인코딩문제 해결
