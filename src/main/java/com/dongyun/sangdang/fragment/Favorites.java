@@ -221,9 +221,14 @@ public class Favorites extends Fragment {
                             mMealTime.setText(R.string.dinner);
                             mMealView.setText("hihi");
                         }
-                        if (mMealString.trim().equals("")) {
+                        try {
+                            if (mMealString.trim().equals("")) {
+                                mMealString = getResources().getString(R.string.mealnone);
+                            }
+                        } catch (Exception e) {
                             mMealString = getResources().getString(R.string.mealnone);
                         }
+
 
                         SRL.setRefreshing(false);
                         mHandler.sendEmptyMessage(0);
