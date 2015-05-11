@@ -95,7 +95,7 @@ public class MainActivity extends ActionBarActivity {
             openMain();
             openParents();
             openMeal();
-            openEvents();
+            //openEvents();
             openSchedule();
             openSchoolIntro();
             openAppInfo();
@@ -156,7 +156,7 @@ public class MainActivity extends ActionBarActivity {
                     }
                 }
             });
-            final CheckBox mEventChkBox = (CheckBox) findViewById(R.id.event_chkbox);
+            /*final CheckBox mEventChkBox = (CheckBox) findViewById(R.id.event_chkbox);
             mEventChkBox.setChecked(sp.getBoolean("event", true));
             mEventChkBox.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -171,7 +171,7 @@ public class MainActivity extends ActionBarActivity {
                         mMainPagerAdapter.notifyDataSetChanged();
                     }
                 }
-            });
+            });*/
             final CheckBox mScheduleChkBox = (CheckBox) findViewById(R.id.schedule_chkbox);
             mScheduleChkBox.setChecked(sp.getBoolean("schedule", true));
             mScheduleChkBox.setOnClickListener(new View.OnClickListener() {
@@ -297,7 +297,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
     }
-
+/*
     private void openEvents() {
         relativeLayoutSettings = (RelativeLayout) findViewById(R.id.event);
         relativeLayoutSettings.setOnClickListener(new View.OnClickListener() {
@@ -315,7 +315,7 @@ public class MainActivity extends ActionBarActivity {
                 }, 500);
             }
         });
-    }
+    }*/
 
     private void openMeal() {
         relativeLayoutSettings = (RelativeLayout) findViewById(R.id.meal);

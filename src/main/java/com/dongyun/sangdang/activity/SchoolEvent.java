@@ -129,7 +129,7 @@ public class SchoolEvent extends ActionBarActivity {
                     authorarray = new ArrayList<String>();
                     datearray = new ArrayList<String>();
                     //파싱할 페이지 URL
-                    Document doc = Jsoup.connect("http://sangdang.hs.kr/index.jsp?SCODE=S0000000206&mnu=M001006001").get();
+                    Document doc = Jsoup.connect("http://sangdang.hs.kr/index.jsp?SCODE=S0000000206&mnu=M001006007").get();
                     Elements rawmaindata = doc.select("#m_mainList tbody tr td div.m_ltitle a"); //Get contents from tags,"a" which are in the class,"listbody"
                     Elements rawauthordata = doc.select("td:eq(2)"); //작성자 이름 얻기 - 3번째 td셀 에서 얻기
                     Elements rawdatedata = doc.select("td:eq(3)"); //작성 날자 얻기 - 4번째 td셀 에서 얻기

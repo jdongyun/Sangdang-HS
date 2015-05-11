@@ -65,8 +65,8 @@ public class Favorites extends Fragment {
     private TextView mMealView;
     private TextView mNParentsTitleView;
     private TextView mNParentsDateView;
-    private TextView mEventTitleView;
-    private TextView mEventsDateView;
+    //private TextView mEventTitleView;
+    //private TextView mEventsDateView;
     private TextView mScheduleTitleView;
     private TextView DAY;
     private TextView mMealTime;
@@ -89,8 +89,8 @@ public class Favorites extends Fragment {
         mMealView = (TextView) view.findViewById(R.id.mealdata);
         mNParentsTitleView = (TextView) view.findViewById(R.id.notiparentdata);
         mNParentsDateView = (TextView) view.findViewById(R.id.notiparentdate);
-        mEventTitleView = (TextView) view.findViewById(R.id.eventsdata);
-        mEventsDateView = (TextView) view.findViewById(R.id.eventsdate);
+        //mEventTitleView = (TextView) view.findViewById(R.id.eventsdata);
+        //mEventsDateView = (TextView) view.findViewById(R.id.eventsdate);
         mScheduleTitleView = (TextView) view.findViewById(R.id.scheduledata);
         DAY = (TextView) view.findViewById(R.id.day);
         mMealTime = (TextView) view.findViewById(R.id.mealtime);
@@ -111,14 +111,14 @@ public class Favorites extends Fragment {
                     if (sp.getBoolean("meal", true) && isNetworkConnected(getActivity())) getMeal();
                     if (sp.getBoolean("notices_parents", true) && isNetworkConnected(getActivity())) getNParents();
                     if (sp.getBoolean("schedule", true) && isNetworkConnected(getActivity())) getSchedule();
-                    if (sp.getBoolean("event", true) && isNetworkConnected(getActivity())) getEvent();
+                    //if (sp.getBoolean("event", true) && isNetworkConnected(getActivity())) getEvent();
                 }
             }
         });
 
         View meal = view.findViewById(R.id.meal);
         View notices_parents = view.findViewById(R.id.notices_parents);
-        View events = view.findViewById(R.id.events);
+        //View events = view.findViewById(R.id.events);
         View schedule = view.findViewById(R.id.schedule);
         sp = getActivity().getSharedPreferences("sangdang_pref", Context.MODE_PRIVATE);
 
@@ -139,7 +139,7 @@ public class Favorites extends Fragment {
         } else {
             notices_parents.setVisibility(View.GONE);
         }
-
+/*
         if (sp.getBoolean("event", true)) {
             events.setVisibility(View.VISIBLE);
             if (isNetworkConnected(getActivity())) {
@@ -148,6 +148,7 @@ public class Favorites extends Fragment {
         } else {
             events.setVisibility(View.GONE);
         }
+        */
 
         if (sp.getBoolean("schedule", true)) {
             schedule.setVisibility(View.VISIBLE);
@@ -175,13 +176,13 @@ public class Favorites extends Fragment {
             }
         });
 
-        events.setOnClickListener(new OnClickListener() {
+        /*events.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), SchoolEvent.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
         schedule.setOnClickListener(new OnClickListener() {
             @Override
@@ -302,7 +303,7 @@ public class Favorites extends Fragment {
         }.start();
     }
 
-
+/*
     void getEvent() {
         SRL.setRefreshing(true);
 
@@ -354,14 +355,14 @@ public class Favorites extends Fragment {
 
                         mHandler.sendEmptyMessage(0);
                         SRL.setRefreshing(false);
-                        mEventTitleView.setText(mEventString);
-                        mEventsDateView.setText("등록일 : " + mEventDate);
+                        //mEventTitleView.setText(mEventString);
+                        //mEventsDateView.setText("등록일 : " + mEventDate);
                     }
                 });
 
             }
         }.start();
-    }
+    }*/
 
     void getSchedule() {
         SRL.setRefreshing(true);
@@ -441,14 +442,14 @@ public class Favorites extends Fragment {
             notices_parents.setVisibility(View.GONE);
         }
 
-        if (sp.getBoolean("event", true)) {
+        /*if (sp.getBoolean("event", true)) {
             events.setVisibility(View.VISIBLE);
             if (isNetworkConnected(getActivity())) {
                 getEvent();
             }
         } else {
             events.setVisibility(View.GONE);
-        }
+        }*/
 
         if (sp.getBoolean("schedule", true)) {
             schedule.setVisibility(View.VISIBLE);
